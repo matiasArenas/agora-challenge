@@ -15,6 +15,6 @@ export class ClientesMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._clienteService.ngOnDestroy();
+
   }
 }
