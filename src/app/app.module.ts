@@ -15,6 +15,7 @@ import { FormularioEntradaComponent } from './components/clientes/pages/clientes
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ListadoClientesComponent } from './components/clientes/pages/listado-clientes/listado-clientes.component';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 @NgModule({
   declarations: [
     AppComponent,

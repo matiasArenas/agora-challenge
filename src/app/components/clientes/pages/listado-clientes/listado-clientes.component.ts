@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Clientes } from '../../models/cliente-model';
@@ -11,14 +12,16 @@ import { ClientesService } from '../../services/clientes.service';
 export class ListadoClientesComponent implements OnInit, OnDestroy {
   dataClientes:Clientes[] =[];
   subscription:Subscription = new Subscription();
-  constructor(private _clienteService: ClientesService) { }
+  fechaDefuncion:string = '';
+  constructor(private _clienteService: ClientesService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.setView();
   }
 
   setView(){
-    this.getClientes();
+    this._clienteService.setListadoClientes()
+    this.getClientes()
   }
 
   getClientes(){
@@ -26,15 +29,21 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
       this._clienteService.dataClientes$.subscribe((data)=>{
         this.dataClientes = data;
       })
-    )
+    );
+    if(this.dataClientes.length > 0)this.calculaPosibleFechaDefuncion();
   }
 
-  seteaSubjectClientes(clientes:Clientes[]){
-    this._clienteService.seteaSubjectClientes(clientes);
+  calculaPosibleFechaDefuncion(){
+    let promedioVida:number = 90;
+    let diferenciaPromedioVida:number[] = [];
+    let fechaHoy:Date = new Date();
+    diferenciaPromedioVida = this.dataClientes.map((element)=>{
+     return ( promedioVida - element.edad);
+    });
+   // this.fechaDefuncion = this.datePipe.transform((fechaHoy, 'MMM d, y'))
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

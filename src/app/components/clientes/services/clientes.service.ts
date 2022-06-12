@@ -1,12 +1,13 @@
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Clientes } from '../models/cliente-model';
 import { BehaviorSubject, Observable, Subscriber, Subscription } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientesService {
+export class ClientesService implements OnDestroy {
   dataClientes$:BehaviorSubject<Clientes[]> = new BehaviorSubject([]);
   subscription:Subscription = new Subscriber();
   dataClientes:Clientes[] = [];
@@ -18,9 +19,9 @@ export class ClientesService {
         data.map((element)=>{
           this.dataClientes.push({...element.payload.doc.data()})
         })
+        this.seteaSubjectClientes(this.dataClientes)
       })
     );
-    this.seteaSubjectClientes(this.dataClientes)
   }
 
   insertClientes(cliente: Clientes): Promise<any>{
@@ -31,7 +32,11 @@ export class ClientesService {
     return this.firestore.collection('clientes').snapshotChanges();
   }
 
-  seteaSubjectClientes(value:Clientes[]){ console.log('value', value)
+  seteaSubjectClientes(value:Clientes[]){
     this.dataClientes$.next(value)
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

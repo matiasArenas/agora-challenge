@@ -60,6 +60,7 @@ export class FormularioEntradaComponent implements OnInit {
       .then(() => {
         this.showSucces();
         this.cleanForm();
+        this._clienteService.setListadoClientes();
         this.cargaSpinner = false;
       })
       .catch((error) => {

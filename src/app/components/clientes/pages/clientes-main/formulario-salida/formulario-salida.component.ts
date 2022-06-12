@@ -11,6 +11,7 @@ import { Clientes } from '../../../models/cliente-model';
 export class FormularioSalidaComponent implements OnInit, OnDestroy {
   subscription:Subscription = new Subscription();
   promedioEdad:number = 0;
+  desvioStandard:number = 0;
   clientes:Clientes[] = [];
   cargaLista:boolean = false;
   constructor(private _clienteService:ClientesService) { }
@@ -32,6 +33,7 @@ export class FormularioSalidaComponent implements OnInit, OnDestroy {
           sumaEdad = sumaEdad + element.edad;
         }));
        this.calculaPromedio(sumaEdad)
+       this.calculaDesvio(this.promedioEdad, this.clientes)
       })
     );
   }
@@ -43,8 +45,13 @@ export class FormularioSalidaComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculaDesvio(){
-
+  calculaDesvio(promedioEdad:number, clientes:Clientes[]){
+    let asignoValores = clientes.map((x)=>{
+      return (x.edad - promedioEdad) ** 2;
+    });
+    let sum = asignoValores.reduce((acc, curr)=>acc + curr, 0);
+    let varianza = sum/clientes.length;
+    this.desvioStandard = Math.sqrt(varianza);
   }
 
   ngOnDestroy(): void {
