@@ -9,23 +9,30 @@ import { Clientes } from '../../models/cliente-model';
   styleUrls: ['./clientes-main.component.scss']
 })
 export class ClientesMainComponent implements OnInit, OnDestroy {
-  subscription:Subscription = new Subscription()
-  constructor(private _clienteService:ClientesService) { }
+  subscription:Subscription = new Subscription();
   dataClientes:Clientes[] = [];
+  constructor(private _clienteService:ClientesService) { }
+ 
   ngOnInit(): void {
+   // this.getClientes();
   }
 
-  getEmpleados(){
-    this.subscription.add(
-      this._clienteService.getClientes().subscribe((data)=>{
-        data.map((element)=>{
-          this.dataClientes.push({
-            ...element.payload.doc.data()
-          })
-        })
-      })
-    );
-  }
+  // getClientes(){
+  //   this.subscription.add(
+  //     this._clienteService.getClientes().subscribe((data)=>{
+  //       data.map((element)=>{
+  //         this.dataClientes.push({
+  //           ...element.payload.doc.data()
+  //         })
+  //       })
+  //       this.seteaSubjectClientes(this.dataClientes)
+  //     })
+  //   );
+  // }
+
+  // seteaSubjectClientes(clientes:Clientes[]){
+  //   this._clienteService.seteaSubjectClientes(clientes);
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe

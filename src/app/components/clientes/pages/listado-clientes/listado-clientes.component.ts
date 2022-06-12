@@ -18,19 +18,19 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
   }
 
   setView(){
-    this.getEmpleados();
+    this.getClientes();
   }
 
-  getEmpleados(){
+  getClientes(){
     this.subscription.add(
-      this._clienteService.getClientes().subscribe((data)=>{
-        data.map((element)=>{
-          this.dataClientes.push({
-            ...element.payload.doc.data()
-          })
-        })
+      this._clienteService.dataClientes$.subscribe((data)=>{
+        this.dataClientes = data;
       })
-    );
+    )
+  }
+
+  seteaSubjectClientes(clientes:Clientes[]){
+    this._clienteService.seteaSubjectClientes(clientes);
   }
 
   ngOnDestroy(): void {
