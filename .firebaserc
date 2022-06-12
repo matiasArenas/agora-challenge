@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "agora-challenge-arenas": {
+      "hosting": {
+        "agora-challenge": [
+          "agora-challenge-arenas"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "agora-challenge-arenas"
+  }
+}
