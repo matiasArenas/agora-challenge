@@ -1,0 +1,42 @@
+<div class="form-container">
+    <div class="mb-4"><h4>Creación de clientes</h4></div>
+  <form action="" [formGroup]="formularioEntrada">
+    <div class="body-container">
+      <div class="mb-4">
+        <label for="exampleFormControlInput1" class="form-label">Nombre <span class="validation">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Ingrese su nombre"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="exampleFormControlInput1" class="form-label">Apellido <span class="validation">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Ingrese su apellido"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="exampleFormControlInput1" class="form-label">Edad <span class="validation">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Ingrese su edad"
+        />
+      </div>
+      <div class="mb-8">
+        <label for="exampleFormControlInput1" class="form-label">Fecha de nacimiento <span class="validation">*</span></label>
+        <input
+          class="form-control"
+          type="date"
+        />
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+      <button type="button" class="btn btn-primary" [disabled]="!formularioEntrada.valid">Guardar</button>
+      <button type="button" class="btn btn-secondary">Descartar</button>
+    </div>
+  </form>
+</div>
