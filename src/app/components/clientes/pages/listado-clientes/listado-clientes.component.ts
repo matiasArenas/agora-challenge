@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Clientes } from '../../models/cliente-model';
 import { ClientesService } from '../../services/clientes.service';
+
 
 @Component({
   selector: 'app-listado-clientes',
@@ -40,7 +42,7 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
     diferenciaPromedioVida = this.dataClientes.map((element)=>{
      return ( promedioVida - element.edad);
     });
-   // this.fechaDefuncion = this.datePipe.transform((fechaHoy, 'MMM d, y'))
+    this.fechaDefuncion = this.datePipe.transform(moment(fechaHoy))
   }
 
   ngOnDestroy(): void {
