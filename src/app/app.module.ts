@@ -15,7 +15,7 @@ import { FormularioEntradaComponent } from './components/clientes/pages/clientes
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ListadoClientesComponent } from './components/clientes/pages/listado-clientes/listado-clientes.component';
 import { environment } from 'src/environments/environment';
-import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,7 @@ import * as moment from 'moment';
       positionClass: 'toast-bottom-right',
     }),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { toTypeScript } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -14,7 +15,7 @@ import { ClientesService } from '../../services/clientes.service';
 export class ListadoClientesComponent implements OnInit, OnDestroy {
   dataClientes:Clientes[] =[];
   subscription:Subscription = new Subscription();
-  fechaDefuncion:string = '';
+  fechaDefuncion:string[] = [];
   constructor(private _clienteService: ClientesService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -22,27 +23,31 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
   }
 
   setView(){
-    this._clienteService.setListadoClientes()
     this.getClientes()
   }
 
   getClientes(){
     this.subscription.add(
-      this._clienteService.dataClientes$.subscribe((data)=>{
-        this.dataClientes = data;
+      this._clienteService.getClientes().subscribe((data)=>{
+        data.map((element)=>{
+          this.dataClientes.push({...element.payload.doc.data()})
+        })
+        this.calculaPosibleFechaDefuncion();
       })
     );
-    if(this.dataClientes.length > 0)this.calculaPosibleFechaDefuncion();
   }
 
   calculaPosibleFechaDefuncion(){
     let promedioVida:number = 90;
     let diferenciaPromedioVida:number[] = [];
-    let fechaHoy:Date = new Date();
+    let fechaHoy:Date = new Date;
     diferenciaPromedioVida = this.dataClientes.map((element)=>{
      return ( promedioVida - element.edad);
     });
-    this.fechaDefuncion = this.datePipe.transform(moment(fechaHoy))
+    diferenciaPromedioVida.map((p, i)=>{
+      this.fechaDefuncion[i] = this.datePipe.transform(moment(fechaHoy, 'DD/MM/YYYY').add(diferenciaPromedioVida[i], 'years').format('DD/MM/YYYY'));
+      console.log(this.fechaDefuncion[i])
+    })
   }
 
   ngOnDestroy(): void {

@@ -37,6 +37,7 @@ export class ClientesService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.dataClientes$.next([]);
     this.subscription.unsubscribe();
   }
 }

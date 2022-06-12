@@ -13,12 +13,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of dataClientes">
+      <tr *ngFor="let item of dataClientes; let i = index">
         <th>{{item.nombre}}</th>
         <td>{{item.apellido}}</td>
         <td>{{item.edad}}</td>
         <td>{{item.fechaNacimiento | date: 'MMM d, y'}}</td>
-        <td></td>
+        <td>{{fechaDefuncion[i]}}</td>
       </tr>
     </tbody>
   </table>
