@@ -2,36 +2,23 @@
   <div class="listado-container">
     <h4>Proyección y análisis de clientes</h4>
   </div>
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
         <th scope="col">Edad</th>
         <th scope="col">Fecha de nacimiento</th>
-        <th scope="col">Fecha probable de muerte</th>
+        <th scope="col">Edad media defunción</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
+      <tr *ngFor="let item of dataClientes">
+        <th>{{item.nombre}}</th>
+        <td>{{item.apellido}}</td>
+        <td>{{item.edad}}</td>
+        <td>{{item.fechaNacimiento | date: 'MMM d, y'}}</td>
+        <td></td>
       </tr>
     </tbody>
   </table>

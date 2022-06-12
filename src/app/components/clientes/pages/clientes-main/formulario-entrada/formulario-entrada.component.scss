@@ -1,7 +1,13 @@
-.form-container{
-    width: 50%;
+.form-container {
+  width: 100%;
 }
 
-.validation{
-    color:red;
+.validation {
+  color: red;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

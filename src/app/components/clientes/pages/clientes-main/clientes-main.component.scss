@@ -1,3 +1,31 @@
 .main-container {
   padding: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.contenedor {
+  &-entrada {
+    width: 40%;
+  }
+  &-salida {
+    width: 40%;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contenedor {
+    &-entrada {
+      width: 100%;
+    }
+    &-salida {
+      width: 100%;
+    }
+  }
 }

@@ -1,11 +1,19 @@
 <div class="form-container">
-    <div class="mb-4"><h4>Creación de clientes</h4></div>
+    <div class="mb-4 header-container">
+      <div><h4>Creación de clientes</h4></div>
+      <div class="spinner" *ngIf="cargaSpinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
   <form action="" [formGroup]="formularioEntrada">
     <div class="body-container">
       <div class="mb-4">
         <label for="exampleFormControlInput1" class="form-label">Nombre <span class="validation">*</span></label>
         <input
           class="form-control"
+          formControlName="nombre"
           type="text"
           placeholder="Ingrese su nombre"
         />
@@ -14,6 +22,7 @@
         <label for="exampleFormControlInput1" class="form-label">Apellido <span class="validation">*</span></label>
         <input
           class="form-control"
+          formControlName="apellido"
           type="text"
           placeholder="Ingrese su apellido"
         />
@@ -22,6 +31,7 @@
         <label for="exampleFormControlInput1" class="form-label">Edad <span class="validation">*</span></label>
         <input
           class="form-control"
+          formControlName="edad"
           type="text"
           placeholder="Ingrese su edad"
         />
@@ -30,13 +40,14 @@
         <label for="exampleFormControlInput1" class="form-label">Fecha de nacimiento <span class="validation">*</span></label>
         <input
           class="form-control"
+          formControlName="fechaNacimiento"
           type="date"
         />
       </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-      <button type="button" class="btn btn-primary" [disabled]="!formularioEntrada.valid">Guardar</button>
-      <button type="button" class="btn btn-secondary">Descartar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!formularioEntrada.valid" (click)="saveClientes()">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cleanForm()">Descartar</button>
     </div>
   </form>
 </div>
